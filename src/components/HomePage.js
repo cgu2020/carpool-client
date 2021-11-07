@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { useState } from "react";
+import { googleLogout, loggedIn } from "./auth/googleAuth";
 
 const HomePage = () => {
   return (
@@ -53,9 +55,10 @@ const HomePage = () => {
           <a
             key="Main"
             href="#"
+            onClick={googleLogout}
             className="block px-3 py-2 rounded-md text-base font-medium duration-200 text-white hover:bg-gray-700 hover:text-white "
           >
-            Login
+            Log out
           </a>
         </div>
       </nav>

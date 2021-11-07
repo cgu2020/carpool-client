@@ -1,19 +1,13 @@
 import firebase from "firebase";
 import "firebaseui/dist/firebaseui.css";
+import { db, auth } from "./firebaseConfig";
 var firebaseui = require("firebaseui");
-
-var login = false;
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-    login = true;
-    var uid = user.uid;
-    var name = user.displayName;
-    var icon = user.icon;
     console.log("logged in");
-    // ...
   } else {
     //prompt a login
     console.log("not logged in");
@@ -21,12 +15,19 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 // Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.default.auth());
+var ui = new firebaseui.auth.AuthUI(auth);
 
 var uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
       console.log("Success");
+      console.log(authResult);
+      const user = authResult.user;
+      db.collection("users").doc(user.uid).set({
+        name: user.displayName,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+      });
       return true;
     },
   },
@@ -37,3 +38,9 @@ var uiConfig = {
 };
 
 ui.start("#firebaseui-auth-container", uiConfig);
+
+export function googleLogout() {
+  auth.signOut().then(() => {
+    console.log("Signed out");
+  });
+}

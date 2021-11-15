@@ -3,6 +3,7 @@ import Navbar from "./Main/Navbar";
 import Rides from "./Main/Rides";
 import Pagination from "./Main/Pagination";
 import Searchbar from "./Main/Searchbar";
+import Modal from "./Main/Modal";
 import firebase from "firebase";
 import "./auth/firebaseConfig.js";
 import "./auth/googleAuth.js";
@@ -15,6 +16,7 @@ function App() {
         <Searchbar />
         <Rides />
       </div>
+      <Modal />
       <div className="flex items-center justify-center">
         <Pagination />
       </div>

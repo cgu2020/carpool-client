@@ -1,9 +1,24 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { useState } from "react";
-import { googleLogout, loggedIn } from "./auth/googleAuth";
+import { useState, useEffect } from "react";
+import { googleLogout } from "./auth/googleAuth";
+import firebase from "firebase/app";
 
 const HomePage = () => {
+  const [authState, setAuthState] = useState({
+    isSignedIn: false,
+    pending: true,
+    user: null,
+  });
+
+  useEffect(() => {
+    const unregisterAuthObserver = firebase
+      .auth()
+      .onAuthStateChanged((user) =>
+        setAuthState({ user, pending: false, isSignedIn: !!user })
+      );
+    return () => unregisterAuthObserver();
+  }, []);
   return (
     <div>
       <nav className="w-full bg-red-400">
@@ -52,14 +67,16 @@ const HomePage = () => {
               </button>
             </div>
           </div>
-          <a
-            key="Main"
-            href="#"
-            onClick={googleLogout}
-            className="block px-3 py-2 rounded-md text-base font-medium duration-200 text-white hover:bg-gray-700 hover:text-white "
-          >
-            Log out
-          </a>
+          {authState.isSignedIn && (
+            <a
+              key="Main"
+              href="#"
+              onClick={googleLogout}
+              className="block px-3 py-2 rounded-md text-base font-medium duration-200 text-white hover:bg-gray-700 hover:text-white "
+            >
+              Log out
+            </a>
+          )}
         </div>
       </nav>
       <div className="bg-red-400">

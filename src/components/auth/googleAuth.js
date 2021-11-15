@@ -7,10 +7,15 @@ firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-    console.log("logged in");
+
+    localStorage.setItem("name", user.displayName);
+    localStorage.setItem("authState", true);
+
+    console.log("OnAuthStateChanged: logged in");
   } else {
     //prompt a login
-    console.log("not logged in");
+    localStorage.setItem("authState", "");
+    console.log("OnAuthStateChanged: not logged in");
   }
 });
 
@@ -20,8 +25,9 @@ var ui = new firebaseui.auth.AuthUI(auth);
 var uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-      console.log("Success");
-      console.log(authResult);
+      const token = authResult.credential.idToken;
+      localStorage.setItem("idToken", token);
+      localStorage.setItem("authState", true);
       const user = authResult.user;
       db.collection("users").doc(user.uid).set({
         name: user.displayName,
@@ -41,6 +47,7 @@ ui.start("#firebaseui-auth-container", uiConfig);
 
 export function googleLogout() {
   auth.signOut().then(() => {
+    localStorage.setItem("authState", "");
     console.log("Signed out");
   });
 }

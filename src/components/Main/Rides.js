@@ -21,10 +21,10 @@ const Rides = () => {
 
   function refQuery() {
     var newRef = ref;
-    if (queryFrom != null && queryFrom != "") {
+    if (queryFrom !== null && queryFrom !== "") {
       newRef = newRef.where("from", "==", queryFrom);
     }
-    if (queryTo != null && queryTo != "") {
+    if (queryTo !== null && queryTo !== "") {
       newRef = newRef.where("to", "==", queryTo);
     }
     return newRef;

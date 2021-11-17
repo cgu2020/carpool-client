@@ -1,22 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { googleLogout } from "./auth/googleAuth";
+import { googleLogout, startFirebaseUI } from "./auth/googleAuth";
 import firebase from "firebase";
 
 const HomePage = () => {
-  const [authState, setAuthState] = useState({
-    isSignedIn: false,
-    pending: true,
-    user: null,
-  });
-
   useEffect(() => {
-    const unregisterAuthObserver = firebase
-      .auth()
-      .onAuthStateChanged((user) =>
-        setAuthState({ user, pending: false, isSignedIn: !!user })
-      );
-    return () => unregisterAuthObserver();
+    if (!localStorage.getItem("authState")) {
+      startFirebaseUI();
+    }
   }, []);
   return (
     <div>
@@ -66,7 +57,7 @@ const HomePage = () => {
               </button>
             </div>
           </div>
-          {authState.isSignedIn && (
+          {localStorage.getItem("authState") && (
             <a
               key="Main"
               href="#"
@@ -75,6 +66,9 @@ const HomePage = () => {
             >
               Log out
             </a>
+          )}
+          {!localStorage.getItem("authState") && (
+            <div id="firebaseui-auth-container"></div>
           )}
         </div>
       </nav>
@@ -89,7 +83,6 @@ const HomePage = () => {
             </p>
           </div>
           <div className="flex justify-center items-center">
-            <div id="firebaseui-auth-container"></div>
             <a
               href="/main"
               className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-4 sm:px-10 py-2 sm:py-4 text-sm"

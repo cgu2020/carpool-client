@@ -13,7 +13,6 @@ function App() {
 
   const openModal = () => {
     setOpen(!open);
-    console.log(open);
   };
 
   return (

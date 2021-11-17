@@ -15,6 +15,7 @@ export default function Modal({ open, setOpen }) {
   const cancelButtonRef = useRef(null);
 
   const onSubmit = (e) => {
+    console.log("sent");
     firebase
       .firestore()
       .collection("rides")

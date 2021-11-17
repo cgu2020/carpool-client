@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./Profile/Navbar";
+import Navbar from "./Main/Navbar";
 import Header from "./Profile/Header";
 import ProfileNotFound from "./Profile/ProfileNotFound";
 

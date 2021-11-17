@@ -1,12 +1,13 @@
 import React from "react";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
+import { googleLogout } from "../auth/googleAuth";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const NavDropdown = () => {
+const NavDropdown = (props) => {
   return (
     <Menu as="div" className="ml-3 relative">
       <div>
@@ -46,24 +47,40 @@ const NavDropdown = () => {
           <Menu.Item>
             {({ active }) => (
               <a
-                href="#"
+                href="/rides"
                 className={classNames(
                   active ? "bg-gray-100" : "",
                   "block px-4 py-2 text-sm text-gray-700"
                 )}
               >
-                Settings
+                Manage Rides
               </a>
             )}
           </Menu.Item>
           <Menu.Item>
             {({ active }) => (
               <a
-                href="#"
+                href="/requests"
                 className={classNames(
                   active ? "bg-gray-100" : "",
                   "block px-4 py-2 text-sm text-gray-700"
                 )}
+              >
+                Manage Requests
+              </a>
+            )}
+          </Menu.Item>
+          <Menu.Item>
+            {({ active }) => (
+              <a
+                href="/main"
+                className={classNames(
+                  active ? "bg-gray-100" : "",
+                  "block px-4 py-2 text-sm text-gray-700"
+                )}
+                onClick={() => {
+                  googleLogout();
+                }}
               >
                 Sign out
               </a>

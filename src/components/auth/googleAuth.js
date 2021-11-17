@@ -50,7 +50,9 @@ var uiConfig = {
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
 };
 
-ui.start("#firebaseui-auth-container", uiConfig);
+export const startFirebaseUI = function (elementId) {
+  ui.start("#firebaseui-auth-container", uiConfig);
+};
 
 export function googleLogout() {
   auth.signOut().then(() => {

@@ -16,16 +16,6 @@ function classNames(...classes) {
 }
 
 const Navbar = ({ modalButton }) => {
-  useEffect(() => {
-    window.addEventListener("click", () => {
-      console.log("TEST");
-    });
-    return () => {
-      window.addEventListener("click", () => {
-        console.log("TEST");
-      });
-    };
-  });
   return (
     <Disclosure as="nav" className="bg-red-400">
       {({ open }) => (
@@ -71,7 +61,7 @@ const Navbar = ({ modalButton }) => {
                           "px-3 py-2 rounded-md text-sm font-medium"
                         )}
                         onClick={
-                          item.name == "Add new!" ? modalButton : () => {}
+                          item.name === "Add new!" ? modalButton : () => {}
                         }
                         aria-current={item.current ? "page" : undefined}
                       >
@@ -90,7 +80,7 @@ const Navbar = ({ modalButton }) => {
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map(
                 (item) =>
-                  item.name != "Add new!" && (
+                  item.name !== "Add new!" && (
                     <Disclosure.Button
                       key={item.name}
                       as="a"

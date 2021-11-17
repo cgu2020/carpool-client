@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import NavProfile from "./NavProfile";
 const navigation = [
-  { name: "Home", href: "#", current: false },
-  { name: "Rides", href: "#", current: true },
+  { name: "Home", href: "/", current: false },
+  { name: "Rides", href: "/main", current: true },
   { name: "Requests", href: "#", current: false },
   { name: "Add new!", href: "#", current: false },
 ];
@@ -16,6 +16,16 @@ function classNames(...classes) {
 }
 
 const Navbar = ({ modalButton }) => {
+  useEffect(() => {
+    window.addEventListener("click", () => {
+      console.log("TEST");
+    });
+    return () => {
+      window.addEventListener("click", () => {
+        console.log("TEST");
+      });
+    };
+  });
   return (
     <Disclosure as="nav" className="bg-red-400">
       {({ open }) => (
@@ -87,9 +97,8 @@ const Navbar = ({ modalButton }) => {
                     item.current
                       ? "bg-red-300 text-white"
                       : "text-white hover:bg-red-300 hover:text-white duration-200 transform",
-                    "block px-3 py-2 rounded-md text-base font-medium"
+                    "block px-3 py-2 rounded-md text-base font-medium button"
                   )}
-                  onClick={item.name == "Add new!" ? modalButton : () => {}}
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}

@@ -25,6 +25,10 @@ function App() {
       </div>
       <Modal open={open} setOpen={openModal} />
       <div className="flex items-center justify-center"></div>
+      <a
+        className="fixed right-5 bottom-5 rounded-full bg-red-400 h-20 w-20 sm:hidden hover:bg-red-300 transform duration-200"
+        onClick={() => openModal()}
+      ></a>
     </div>
   );
 }

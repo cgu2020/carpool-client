@@ -91,12 +91,12 @@ const HomePage = () => {
           </div>
           <div className="flex justify-center items-center">
             <div id="firebaseui-auth-container"></div>
-            <Link
-              to="/main"
+            <a
+              href="/main"
               className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-4 sm:px-10 py-2 sm:py-4 text-sm"
             >
               Get Started
-            </Link>
+            </a>
           </div>
         </div>
       </div>

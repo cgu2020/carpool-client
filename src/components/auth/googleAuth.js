@@ -27,12 +27,16 @@ var uiConfig = {
     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
       const token = authResult.credential.idToken;
       localStorage.setItem("idToken", token);
-      localStorage.setItem("authState", true);
+      localStorage.setItem("authState", "true");
+
       const user = authResult.user;
+      localStorage.setItem("name", user.displayName);
+      localStorage.setItem("photoURL", user.photoURL);
       db.collection("users").doc(user.uid).set({
         name: user.displayName,
         email: user.email,
         phoneNumber: user.phoneNumber,
+        uid: user.uid,
       });
       return true;
     },

@@ -4,9 +4,9 @@ import "../../index.css";
 const RideBox = (props) => {
   const ride = props.content;
   return (
-    <div className="xl:w-1/4 md:w-1/2 sm:w-full p-4">
+    <div className="xl:w-1/4 md:w-1/2 w-full p-4">
       <div className="bg-gray-100 p-6 rounded-lg">
-        <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
+        <h3 className="tracking-widest text-red-400 text-xs font-medium title-font">
           Departure: {ride.departureMonth}/{ride.departureDay}
         </h3>
         <div className="flex items-center">
@@ -50,7 +50,7 @@ const RideBox = (props) => {
         </div>
 
         <div className="flex items-center justify-center mt-4">
-          <button className="p-2 pl-5 pr-5 transition-colors duration-700 transform bg-indigo-500 hover:bg-blue-400 text-gray-100 text-lg rounded-lg focus:border-4 border-indigo-300">
+          <button className="p-2 pl-5 pr-5 transition-colors duration-700 transform bg-red-400 hover:bg-red-500 text-gray-100 text-lg rounded-lg focus:border-4 border-indigo-300">
             Request
           </button>
         </div>

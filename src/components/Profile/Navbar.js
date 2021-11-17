@@ -1,14 +1,11 @@
 import React from "react";
-
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Link, withRouter } from "react-router-dom";
-import NavProfile from "./NavProfile";
 const navigation = [
   { name: "Home", href: "#", current: false },
-  { name: "Rides", href: "#", current: true },
+  { name: "Rides", href: "#", current: false },
   { name: "Requests", href: "#", current: false },
-  { name: "Add new!", href: "#", current: false },
 ];
 
 function classNames(...classes) {
@@ -60,9 +57,6 @@ const Navbar = ({ modalButton }) => {
                             : "text-white hover:bg-red-300 hover:text-white duration-200 transform",
                           "px-3 py-2 rounded-md text-sm font-medium"
                         )}
-                        onClick={
-                          item.name == "Add new!" ? modalButton : () => {}
-                        }
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
@@ -71,8 +65,6 @@ const Navbar = ({ modalButton }) => {
                   </div>
                 </div>
               </div>
-
-              <NavProfile />
             </div>
           </div>
 
@@ -89,7 +81,6 @@ const Navbar = ({ modalButton }) => {
                       : "text-white hover:bg-red-300 hover:text-white duration-200 transform",
                     "block px-3 py-2 rounded-md text-base font-medium"
                   )}
-                  onClick={item.name == "Add new!" ? modalButton : () => {}}
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}

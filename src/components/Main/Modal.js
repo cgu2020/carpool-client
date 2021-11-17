@@ -6,36 +6,34 @@ import Box from "@mui/material/Box";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DatePicker";
+import userEvent from "@testing-library/user-event";
 
-export default function Modal() {
-  const [open, setOpen] = useState(true);
+export default function Modal({ open, setOpen }) {
   const [value, setValue] = useState(new Date());
+  const [from, setFrom] = useState("");
   const [dest, setDest] = useState("");
   const [desc, setDesc] = useState("");
   const cancelButtonRef = useRef(null);
 
   const onSubmit = (e) => {
     console.log(dest);
-    var authState = false;
-    firebase.auth().onAuthStateChanged((user) => {
-      authState = !!user;
-    });
+    firebase
+      .firestore()
+      .collection("rides")
+      .doc()
+      .set({
+        departureDay: value.getDay(),
+        departureMonth: value.getMonth(),
+        departureYear: value.getFullYear(),
+        from: from,
+        to: dest,
+        description: desc,
+        name: localStorage.getItem("name"),
+        uid: localStorage.getItem("uid"),
+      });
+
+    console.log("test");
   };
-
-  const [authState, setAuthState] = useState({
-    isSignedIn: false,
-    pending: true,
-    uid: null,
-  });
-
-  useEffect(() => {
-    const unregisterAuthObserver = firebase
-      .auth()
-      .onAuthStateChanged((user) =>
-        setAuthState({ user, pending: false, isSignedIn: !!user })
-      );
-    return () => unregisterAuthObserver();
-  }, []);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -93,7 +91,21 @@ export default function Modal() {
                           type="text"
                           id="search-form-price"
                           className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                          placeholder="Destination"
+                          placeholder="From"
+                          value={from}
+                          onChange={(e) => {
+                            setFrom(e.target.value);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full">
+                      <div className=" relative ">
+                        <input
+                          type="text"
+                          id="search-form-price"
+                          className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                          placeholder="To"
                           value={dest}
                           onChange={(e) => {
                             setDest(e.target.value);
@@ -150,7 +162,7 @@ export default function Modal() {
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={() => {
-                    setOpen(false);
+                    setOpen();
                     onSubmit();
                   }}
                 >
@@ -159,7 +171,7 @@ export default function Modal() {
                 <button
                   type="button"
                   className=" w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => setOpen(false)}
+                  onClick={() => setOpen()}
                   ref={cancelButtonRef}
                 >
                   Cancel

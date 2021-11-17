@@ -12,7 +12,12 @@ const NavDropdown = () => {
       <div>
         <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
           <span className="sr-only">Open user menu</span>
-          <div className="h-8 w-8 rounded-full"></div>
+          <img
+            className="h-8 w-8 rounded-full"
+            src={localStorage.getItem("photoURL")}
+            referrerpolicy="no-referrer"
+            alt=""
+          />
         </Menu.Button>
       </div>
       <Transition
@@ -28,7 +33,7 @@ const NavDropdown = () => {
           <Menu.Item>
             {({ active }) => (
               <a
-                href="#"
+                href="/profile"
                 className={classNames(
                   active ? "bg-gray-100" : "",
                   "block px-4 py-2 text-sm text-gray-700"

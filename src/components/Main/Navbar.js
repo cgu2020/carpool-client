@@ -88,22 +88,25 @@ const Navbar = ({ modalButton }) => {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-red-300 text-white"
-                      : "text-white hover:bg-red-300 hover:text-white duration-200 transform",
-                    "block px-3 py-2 rounded-md text-base font-medium button"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
+              {navigation.map(
+                (item) =>
+                  item.name != "Add new!" && (
+                    <Disclosure.Button
+                      key={item.name}
+                      as="a"
+                      href={item.href}
+                      className={classNames(
+                        item.current
+                          ? "bg-red-300 text-white"
+                          : "text-white hover:bg-red-300 hover:text-white duration-200 transform",
+                        "block px-3 py-2 rounded-md text-base font-medium button"
+                      )}
+                      aria-current={item.current ? "page" : undefined}
+                    >
+                      {item.name}
+                    </Disclosure.Button>
+                  )
+              )}
             </div>
           </Disclosure.Panel>
         </>

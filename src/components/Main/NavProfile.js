@@ -1,8 +1,6 @@
 import React from "react";
 import { BellIcon } from "@heroicons/react/outline";
 import NavDropdown from "./NavDropdown";
-import { useState, useEffect } from "react";
-import firebase from "firebase/app";
 
 const NavProfile = () => {
   return localStorage.getItem("authState") ? (
@@ -14,7 +12,7 @@ const NavProfile = () => {
         <span className="sr-only">View notifications</span>
         <BellIcon className="h-6 w-6" aria-hidden="true" />
       </button>
-      <div class="ml-2 text-white">{localStorage.getItem("name")}</div>
+      <div className="ml-2 text-white">{localStorage.getItem("name")}</div>
       {/* Profile dropdown */}
       <NavDropdown />
     </div>

@@ -1,8 +1,7 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { googleLogout } from "./auth/googleAuth";
-import firebase from "firebase/app";
+import firebase from "firebase";
 
 const HomePage = () => {
   const [authState, setAuthState] = useState({

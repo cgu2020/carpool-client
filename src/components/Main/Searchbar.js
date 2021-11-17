@@ -4,15 +4,15 @@ const Searchbar = () => {
   return (
     <form action="/main/" method="get">
       <div className="flex justify-center">
-        <div className="mt-2 mb-4 border-2 py-1 px-3 flex justify-between rounde-md rounded-md xl:w-3/4">
+        <div className="w-11/12 mt-2 mb-4 border-2 py-1 px-3 flex justify-between rounde-md rounded-md xl:w-3/4">
           <input
-            className="flex-grow outline-none text-gray-600 focus:text-blue-600"
+            className="w-1/2 flex-grow outline-none text-gray-600 focus:text-blue-600"
             type="text"
             placeholder="From"
             name="f"
           />
           <input
-            className="flex-grow outline-none text-gray-600 focus:text-blue-600"
+            className="w-1/2 flex-grow outline-none text-gray-600 focus:text-blue-600"
             type="text"
             placeholder="To"
             name="t"
@@ -21,7 +21,7 @@ const Searchbar = () => {
             <spa>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-gray-400 hover:text-blue-400 transition duration-100 cursor-pointer"
+                className="flex-grow h-6 w-6 text-gray-400 hover:text-blue-400 transition duration-100 cursor-pointer"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

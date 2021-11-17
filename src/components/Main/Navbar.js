@@ -2,7 +2,7 @@ import React from "react";
 
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NavProfile from "./NavProfile";
 const navigation = [
   { name: "Home", href: "#", current: false },
@@ -24,7 +24,7 @@ const Navbar = ({ modalButton }) => {
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XIcon
@@ -42,7 +42,7 @@ const Navbar = ({ modalButton }) => {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div>
                   <Link
-                    class="nav-linkno-underline text-2xl font-bold text-white dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
+                    className="nav-linkno-underline text-2xl font-bold text-white dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
                     to="/"
                   >
                     CUC

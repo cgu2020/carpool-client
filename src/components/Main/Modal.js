@@ -1,12 +1,11 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useRef, useState, useEffect } from "react";
+import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import firebase from "firebase/app";
+import firebase from "firebase";
 import Box from "@mui/material/Box";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DatePicker";
-import userEvent from "@testing-library/user-event";
 
 export default function Modal({ open, setOpen }) {
   const [value, setValue] = useState(new Date());
@@ -16,7 +15,6 @@ export default function Modal({ open, setOpen }) {
   const cancelButtonRef = useRef(null);
 
   const onSubmit = (e) => {
-    console.log(dest);
     firebase
       .firestore()
       .collection("rides")
@@ -31,8 +29,6 @@ export default function Modal({ open, setOpen }) {
         name: localStorage.getItem("name"),
         uid: localStorage.getItem("uid"),
       });
-
-    console.log("test");
   };
 
   return (

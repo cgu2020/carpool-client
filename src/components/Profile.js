@@ -1,14 +1,15 @@
 import React from "react";
 import Navbar from "./Profile/Navbar";
 import Header from "./Profile/Header";
+import ProfileNotFound from "./Profile/ProfileNotFound";
 
-const profile = () => {
+const Profile = (props) => {
   return (
     <div>
       <Navbar />
-      <Header />
+      {props.uid == null ? <ProfileNotFound /> : <Header uid={props.uid} />}
     </div>
   );
 };
 
-export default profile;
+export default Profile;

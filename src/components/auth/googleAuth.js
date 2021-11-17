@@ -9,7 +9,9 @@ firebase.auth().onAuthStateChanged((user) => {
     // https://firebase.google.com/docs/reference/js/firebase.User
 
     localStorage.setItem("name", user.displayName);
-    localStorage.setItem("authState", true);
+    localStorage.setItem("photoURL", user.photoURL);
+    localStorage.setItem("uid", user.uid);
+    localStorage.setItem("authState", "true");
 
     console.log("OnAuthStateChanged: logged in");
   } else {
@@ -26,16 +28,17 @@ var uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
       const token = authResult.credential.idToken;
-      localStorage.setItem("idToken", token);
       localStorage.setItem("authState", "true");
-
       const user = authResult.user;
       localStorage.setItem("name", user.displayName);
       localStorage.setItem("photoURL", user.photoURL);
+      localStorage.setItem("uid", user.uid);
+
       db.collection("users").doc(user.uid).set({
         name: user.displayName,
         email: user.email,
         phoneNumber: user.phoneNumber,
+        photoURL: user.photoURL,
         uid: user.uid,
       });
       return true;

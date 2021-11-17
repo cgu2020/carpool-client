@@ -4,7 +4,6 @@ import Rides from "./Main/Rides";
 import Pagination from "./Main/Pagination";
 import Searchbar from "./Main/Searchbar";
 import Modal from "./Main/Modal";
-import firebase from "firebase";
 import { useState } from "react";
 import "./auth/firebaseConfig.js";
 import "./auth/googleAuth.js";
@@ -25,9 +24,7 @@ function App() {
         <Rides />
       </div>
       <Modal open={open} setOpen={openModal} />
-      <div className="flex items-center justify-center">
-        <Pagination />
-      </div>
+      <div className="flex items-center justify-center"></div>
     </div>
   );
 }

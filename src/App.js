@@ -11,7 +11,15 @@ function App() {
         <Switch>
           <Route path="/" exact component={() => <HomePage />} />
           <Route path="/main" exact component={() => <Main />} />
-          <Route path="/profile" exact component={() => <Profile />} />
+          <Route
+            path="/profile"
+            exact
+            component={() => <Profile uid={null} />}
+          />
+          <Route
+            path="/profile/:userId"
+            render={(props) => <Profile uid={props.match.params.userId} />}
+          />
         </Switch>
       </Router>
     </div>

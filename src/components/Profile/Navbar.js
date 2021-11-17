@@ -39,7 +39,7 @@ const Navbar = ({ modalButton }) => {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div>
                   <Link
-                    class="nav-linkno-underline text-2xl font-bold text-white dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
+                    className="nav-linkno-underline text-2xl font-bold text-white dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
                     to="/"
                   >
                     CUC

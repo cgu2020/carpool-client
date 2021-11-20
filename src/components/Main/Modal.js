@@ -15,7 +15,6 @@ export default function Modal({ open, setOpen }) {
   const cancelButtonRef = useRef(null);
 
   const onSubmit = (e) => {
-    console.log("sent");
     firebase
       .firestore()
       .collection("rides")
@@ -24,11 +23,13 @@ export default function Modal({ open, setOpen }) {
         departureDay: value.getDay(),
         departureMonth: value.getMonth(),
         departureYear: value.getFullYear(),
+        time: value.getTime(),
         from: from,
         to: dest,
         description: desc,
         name: localStorage.getItem("name"),
         uid: localStorage.getItem("uid"),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
   };
 

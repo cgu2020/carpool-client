@@ -1,22 +1,57 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DateRangePicker from "@mui/lab/DateRangePicker";
 
-const Searchbar = () => {
+const Searchbar = (props) => {
+  const { search } = window.location;
+  const date1 = new URLSearchParams(search).get("d1");
+  const date2 = new URLSearchParams(search).get("d2");
+
+  const [value, setValue] = React.useState([new Date(date1), new Date(date2)]);
+
   return (
     <form action="/main/" method="get">
       <div className="flex justify-center">
-        <div className="w-11/12 mt-2 mb-4 border-2 py-1 px-3 flex justify-between rounde-md rounded-md xl:w-3/4">
+        <div className="w-full flex-wrap mt-2 mb-4 border-2 py-1 px-3 flex justify-between rounde-md rounded-md xl:w-3/4">
           <input
-            className="w-1/2 flex-grow outline-none text-gray-600 focus:text-blue-600"
+            className="w-1/2 sm:w-1/3 flex-grow outline-none text-gray-600 focus:text-blue-600"
             type="text"
             placeholder="From"
             name="f"
           />
           <input
-            className="w-1/2 flex-grow outline-none text-gray-600 focus:text-blue-600"
+            className="w-1/2 sm:w-1/3 flex-grow outline-none text-gray-600 focus:text-blue-600"
             type="text"
             placeholder="To"
             name="t"
           />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DateRangePicker
+              label="Advanced keyboard"
+              value={value}
+              className={"w-full"}
+              onChange={(newValue) => setValue(newValue)}
+              renderInput={(startProps, endProps) => (
+                <React.Fragment>
+                  <input
+                    className="w-1/2 flex-grow outline-none text-gray-600 focus:text-blue-600"
+                    type="text"
+                    name="d1"
+                    ref={startProps.inputRef}
+                    {...startProps.inputProps}
+                  />
+                  <input
+                    className="w-1/2 flex-grow outline-none text-gray-600 focus:text-blue-600"
+                    type="text"
+                    name="d2"
+                    ref={endProps.inputRef}
+                    {...endProps.inputProps}
+                  />
+                </React.Fragment>
+              )}
+            />
+          </LocalizationProvider>
           <button type="submit">
             <spa>
               <svg

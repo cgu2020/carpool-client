@@ -19,3 +19,13 @@ a {
 .firebaseui-id-page-callback {
   display: none !important;
 }
+
+.css-17vdz66 {
+  width: 90%;
+}
+
+@media (min-width: 640px) {
+  .css-17vdz66 {
+    width: 25%;
+  }
+}

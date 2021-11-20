@@ -1,7 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { googleLogout, startFirebaseUI } from "./auth/googleAuth";
-import firebase from "firebase";
 
 const HomePage = () => {
   useEffect(() => {

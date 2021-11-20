@@ -51,7 +51,7 @@ const Ride = (props) => {
 
         <div className="flex items-center justify-center mt-4">
           <button className="p-2 pl-5 pr-5 transition-colors duration-700 transform bg-red-400 hover:bg-red-500 text-gray-100 text-lg rounded-lg focus:border-4 border-indigo-300">
-            {props.isUser ? "Edit" : "Request"}
+            Edit
           </button>
         </div>
       </div>

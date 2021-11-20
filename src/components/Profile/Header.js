@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 const Header = (props) => {
   const uid = props.uid;
+  const isUser = uid === localStorage.getItem("uid");
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -166,7 +167,7 @@ const Header = (props) => {
               </div>
               <div className="flex flex-wrap -m-4">
                 {rides.map((ride) => (
-                  <Ride content={ride} />
+                  <Ride content={ride} isUser={isUser} />
                 ))}
               </div>
             </div>

@@ -1,24 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateRangePicker from "@mui/lab/DateRangePicker";
 
 const Searchbar = () => {
   const { search } = window.location;
-  var date1 = new Date(new URLSearchParams(search).get("d1"));
-  var date2 = new Date(new URLSearchParams(search).get("d2"));
+  var date1 = new URLSearchParams(search).get("d1");
+  var date2 = new URLSearchParams(search).get("d2");
 
-  const [value, setValue] = useState([null, null]);
-
-  useEffect(() => {
-    if (isNaN(date1.getTime())) {
-      date1 = null;
-    }
-    if (isNaN(date2.getTime())) {
-      date2 = null;
-    }
-    setValue([date1, date2]);
-  }, [setValue]);
+  const [value, setValue] = useState([date1, date2]);
 
   return (
     <form action="/main/" method="get">
@@ -38,7 +28,9 @@ const Searchbar = () => {
           />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DateRangePicker
+              disablePast
               label="Advanced keyboard"
+              clearable={true}
               value={value}
               className={"w-full"}
               onChange={(newValue) => setValue(newValue)}

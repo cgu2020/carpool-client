@@ -3,12 +3,22 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateRangePicker from "@mui/lab/DateRangePicker";
 
-const Searchbar = (props) => {
+const Searchbar = () => {
   const { search } = window.location;
-  const date1 = new URLSearchParams(search).get("d1");
-  const date2 = new URLSearchParams(search).get("d2");
+  var date1 = new Date(new URLSearchParams(search).get("d1"));
+  var date2 = new Date(new URLSearchParams(search).get("d2"));
 
-  const [value, setValue] = React.useState([new Date(date1), new Date(date2)]);
+  const [value, setValue] = useState([null, null]);
+
+  useEffect(() => {
+    if (isNaN(date1.getTime())) {
+      date1 = null;
+    }
+    if (isNaN(date2.getTime())) {
+      date2 = null;
+    }
+    setValue([date1, date2]);
+  }, [setValue]);
 
   return (
     <form action="/main/" method="get">

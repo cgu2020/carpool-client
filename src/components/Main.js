@@ -10,7 +10,6 @@ import "./auth/googleAuth.js";
 
 function App() {
   const [open, setOpen] = useState(false);
-  const [dates, setDates] = useState([new Date(), new Date()]);
 
   const openModal = () => {
     setOpen(!open);

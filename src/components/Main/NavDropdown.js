@@ -16,7 +16,7 @@ const NavDropdown = (props) => {
           <img
             className="h-8 w-8 rounded-full"
             src={localStorage.getItem("photoURL")}
-            referrerpolicy="no-referrer"
+            referrerPolicy="no-referrer"
             alt=""
           />
         </Menu.Button>

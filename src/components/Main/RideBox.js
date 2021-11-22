@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import RequestModal from "./RequestModal";
 import "../../index.css";
 
 const RideBox = (props) => {
+  const [open, setOpen] = useState(false);
+
+  function openModal() {
+    setOpen(!open);
+  }
+
   const ride = props.content;
   return (
     <div className="xl:w-1/4 md:w-1/2 w-full p-4">
@@ -50,10 +57,16 @@ const RideBox = (props) => {
         </div>
 
         <div className="flex items-center justify-center mt-4">
-          <button className="p-2 pl-5 pr-5 transition-colors duration-700 transform bg-red-400 hover:bg-red-500 text-gray-100 text-lg rounded-lg focus:border-4 border-indigo-300">
+          <button
+            onClick={() => {
+              openModal();
+            }}
+            className="p-2 pl-5 pr-5 transition-colors duration-700 transform bg-red-400 hover:bg-red-500 text-gray-100 text-lg rounded-lg focus:border-4 border-indigo-300"
+          >
             Request
           </button>
         </div>
+        <RequestModal open={open} setOpen={openModal} ride={ride} />
       </div>
     </div>
   );

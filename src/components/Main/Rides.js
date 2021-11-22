@@ -6,8 +6,8 @@ import React, { useState, useEffect } from "react";
 const { search } = window.location;
 const queryFrom = new URLSearchParams(search).get("f");
 const queryTo = new URLSearchParams(search).get("t");
-const date1 = new URLSearchParams(search).get("d1");
-const date2 = new URLSearchParams(search).get("d2");
+const date1 = new Date(new URLSearchParams(search).get("d1"));
+const date2 = new Date(new URLSearchParams(search).get("d2"));
 
 const Rides = () => {
   const [rides, setRides] = useState([]);
@@ -20,12 +20,12 @@ const Rides = () => {
 
   //ONE TIME GET FUNCTION
   function getRides() {
-    ridesQuery(queryFrom, queryTo, new Date(date1), new Date(date2))
+    ridesQuery(queryFrom, queryTo, date1, date2)
       .get()
       .then((querySnapshot) => {
         const ridesArray = [];
         querySnapshot.forEach((doc) => {
-          const ride = rideConverter.fromFirestore(doc.data());
+          const ride = rideConverter.fromFirestore(doc.data(), doc.id);
           ridesArray.push(ride);
         });
         setRides(ridesArray);
@@ -43,7 +43,7 @@ const Rides = () => {
   return (
     <div className="flex flex-wrap -m-4">
       {rides.map((ride) => (
-        <RideBox content={ride} />
+        <RideBox key={ride.id} content={ride} />
       ))}
     </div>
   );

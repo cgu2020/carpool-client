@@ -2,7 +2,7 @@ import firebase from "firebase";
 
 export var rideConverter = {
   toFirestore: function (city) {},
-  fromFirestore: function (data) {
+  fromFirestore: function (data, id) {
     return {
       departureDay: data.departureDay,
       departureMonth: data.departureMonth,
@@ -12,6 +12,8 @@ export var rideConverter = {
       description: data.description,
       name: data.name,
       uid: data.uid,
+      id: id,
+      timestamp: data.timestamp,
     };
   },
 };
@@ -24,11 +26,10 @@ export function ridesQuery(from, to, date1, date2) {
   if (to !== null && to !== "") {
     newRef = newRef.where("to", "==", to);
   }
-  if (!isNaN(date1.getTime())) {
-    console.log(date1);
+  if (date1.getTime() !== 0) {
     newRef = newRef.where("time", ">=", date1.getTime());
   }
-  if (!isNaN(date2.getTime())) {
+  if (date2.getTime() !== 0) {
     newRef = newRef.where("time", "<=", date1.getTime());
   }
   return newRef;
